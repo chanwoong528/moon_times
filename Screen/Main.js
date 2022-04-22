@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   Text,
   StyleSheet,
@@ -10,6 +10,7 @@ import {
 import PushNotification from 'react-native-push-notification';
 import SliderNews from '../components/Slider/SliderNews';
 import CardList from '../components/ListofCard/CardList';
+import FullModal from '../components/Modal/FullModal';
 const BS = 'business';
 const EN = 'entertainment';
 const GE = 'general';
@@ -17,6 +18,7 @@ const HE = 'health';
 
 const Main = () => {
   console.log(Platform.OS === 'ios');
+  const [admodal, setAdmodal] = useState(true);
   const createChannel = () => {
     console.log('Channel Crreated');
     PushNotification.createChannel({
@@ -27,8 +29,12 @@ const Main = () => {
   useEffect(() => {
     createChannel();
   }, []);
+  const onCloseModal = () => {
+    setAdmodal(false);
+  };
   return (
     <ScrollView style={styles.main}>
+      {admodal && <FullModal onClose={onCloseModal} />}
       <StatusBar color="black" />
       <Text style={styles.title}>Moon Times</Text>
       <SliderNews />
