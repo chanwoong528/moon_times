@@ -33,7 +33,7 @@ const Main = () => {
     setAdmodal(false);
   };
   return (
-    <ScrollView style={styles.main}>
+    <ScrollView style={styles.main} scrollEnabled={admodal ? false : true}>
       {admodal && <FullModal onClose={onCloseModal} />}
       <StatusBar color="black" />
       <Text style={styles.title}>Moon Times</Text>

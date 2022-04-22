@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
-import {View, Text, StyleSheet, Image} from 'react-native';
+import {View, Text, StyleSheet, Image, Dimensions} from 'react-native';
 import CustomBtn from '../Common/CustomBtn';
-
+const H = Dimensions.get('window').height;
 const FullModal = ({onClose}) => {
   const [imgSrc, setImgSrc] = useState('');
   useEffect(() => {
@@ -21,11 +21,11 @@ const FullModal = ({onClose}) => {
 
   return (
     <View style={styles.modal_container}>
-      <View>
+      <View style={styles.modal_header}>
         <CustomBtn title="close" onPress={onClose} />
         <Text>FullModal</Text>
       </View>
-      <View>
+      <View style={styles.modal_body}>
         {imgSrc !== '' && (
           <Image style={styles.modal_img} source={{uri: imgSrc}} />
         )}
@@ -37,13 +37,19 @@ const FullModal = ({onClose}) => {
 const styles = StyleSheet.create({
   modal_container: {
     width: '100%',
-    height: '100%',
+    height: H,
+    alignItems: 'center',
+    justifyContent: 'space-between',
   },
-  modal_header: {},
-  modal_body: {},
+  modal_header: {
+    top: 0,
+  },
+  modal_body: {
+    marginBottom: 100,
+  },
   modal_img: {
-    width: 100,
-    height: 100,
+    width: 300,
+    height: 300,
   },
 });
 
